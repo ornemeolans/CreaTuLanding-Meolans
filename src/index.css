@@ -54,3 +54,57 @@ h1, h2, h5, .nav-link, .brand {
 .nav-link-kosa:hover {
     color: var(--color-accent);
 }
+
+/* --- Nuevos estilos agregados para reemplazar inline styles --- */
+
+/* Estilos para CartWidget */
+.cart-widget {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-primary);
+    position: relative;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-counter {
+    background-color: var(--color-accent); /* Siena Quemado */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 5px;
+    line-height: 1;
+}
+
+/* Estilos para ItemListContainer */
+.item-list-container {
+    padding: 50px;
+    text-align: center;
+    margin: 50px auto;
+    max-width: 90%;
+}
+
+.greeting-title {
+    color: var(--color-accent);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.greeting-subtitle {
+    margin-top: 15px;
+}
+
+/* Estilos para el Footer (que estaba en App.js) */
+.footer-kosa {
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-support);
+    font-size: 0.8rem;
+}
