@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// 👇 Cambiamos BrowserRouter por HashRouter
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
-// 👇 IMPORTANTE: Importar los estilos aquí
 import './App.css'; 
 
 function App() {
     return (
         <div className="App">
-            <BrowserRouter>
+            {/* Usamos HashRouter para que funcione en GitHub Pages sin errores al recargar */}
+            <HashRouter>
                 <NavBar />
                 <Routes>
                     <Route path='/' element={<ItemListContainer greeting={'Todos nuestros productos'} />} />
@@ -17,7 +18,7 @@ function App() {
                     <Route path='/item/:itemId' element={<ItemDetailContainer />} />
                     <Route path='*' element={<h1>404 NOT FOUND</h1>} />
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
