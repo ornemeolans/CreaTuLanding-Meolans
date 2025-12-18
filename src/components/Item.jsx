@@ -1,27 +1,29 @@
 import { Link } from 'react-router-dom'
 
-const Item = ({ id, name, img, price, stock }) => {
+// Eliminé 'stock' de aquí abajo 👇
+const Item = ({ id, name, img, price }) => {
     return (
-        <article className="card-body" style={{ width: '300px', border: '1px solid #D1D1D1', borderRadius: '8px', padding: '10px' }}>
-            <header>
-                <h2 className="card-title">
-                    {name}
-                </h2>
-            </header>
+        <article className="card-body">
             <picture>
-                <img src={img} alt={name} className="ItemImg" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                <img src={img} alt={name} className="ItemImg" />
             </picture>
-            <section>
-                <p>
-                    Precio: ${price}
-                </p>
-                <p>
-                    Stock disponible: {stock}
-                </p>
-            </section>
-            <footer className='ItemFooter'>
-                <Link to={`/item/${id}`} className='Option' style={{ backgroundColor: '#1A1A1A', color: 'white', padding: '5px 10px', textDecoration: 'none', borderRadius: '4px' }}>Ver detalle</Link>
-            </footer>
+            <div className="card-content">
+                <header>
+                    <h2 className="card-title">
+                        {name}
+                    </h2>
+                </header>
+                <section>
+                    <p className="card-price">
+                        ${price}
+                    </p>
+                </section>
+                <footer className='ItemFooter'>
+                    <Link to={`/item/${id}`} className='btn-detail'>
+                        Ver detalle
+                    </Link>
+                </footer>
+            </div>
         </article>
     )
 }

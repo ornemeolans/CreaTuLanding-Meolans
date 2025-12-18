@@ -15,16 +15,16 @@ const ItemListContainer = ({ greeting }) => {
     const [loadedCategory, setLoadedCategory] = useState(null);
 
     useEffect(() => {
-        // Eliminamos el setLoading(true) síncrono que causaba el error.
+        // Elimino el setLoading(true) síncrono que causaba el error.
 
-        // Seleccionamos la función según si hay categoría o no
+        // Selecciono la función según si hay categoría o no
         const asyncFunc = categoryId ? getProductsByCategory : getProducts;
 
         asyncFunc(categoryId)
             .then(response => {
                 setProducts(response);
-                // Una vez que llegan los datos, actualizamos "loadedCategory"
-                // para indicar que ya tenemos lo que pide la URL.
+                // Una vez que llegan los datos, actualizo "loadedCategory"
+                // para indicar que ya tengo lo que pide la URL.
                 setLoadedCategory(categoryId);
             })
             .catch(error => {

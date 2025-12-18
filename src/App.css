@@ -1,42 +1,186 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* --- HEADER & NAVBAR --- */
+.navbar-kosa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--color-secondary); /* Beige de fondo */
+  border-bottom: 1px solid var(--color-primary); /* Línea sutil separadora */
+}
+
+.brand-kosa {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.nav-links-kosa {
+  display: flex;
+  gap: 2rem;
+}
+
+.Option {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+.Option:hover {
+  color: var(--color-accent);
+}
+
+.ActiveOption {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-accent); /* Siena Quemado para activo */
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* --- ITEM LIST & CONTAINER --- */
+.item-list-container {
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.greeting-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* --- ITEM CARD (Catálogo) --- */
+.card-body {
+  background-color: var(--color-white);
+  width: 280px;
+  border: 1px solid transparent; /* Limpio, sin bordes grises fuertes */
+  border-radius: 0px; /* Bordes rectos (Minimalista) */
+  padding: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-body:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.ItemImg {
+  width: 100%;
+  height: 280px; /* Imagen cuadrada/vertical */
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.card-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-price {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Botón "Ver detalle" */
+.btn-detail {
+  display: block;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.8rem;
+  text-align: center;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s;
+}
+
+.btn-detail:hover {
+  background-color: var(--color-accent);
+}
+
+/* --- ITEM DETAIL (Detalle de Producto) --- */
+.ItemDetailContainer {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.CardItem {
+  display: flex;
+  flex-direction: row; /* Diseño horizontal para escritorio */
+  background-color: var(--color-white);
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* En móbiles se ve en columna */
+@media (max-width: 768px) {
+  .CardItem {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .ItemImgDetail, .DetailContent {
+    width: 100%;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.ItemImgDetail {
+  width: 50%;
+  object-fit: cover;
 }
 
-.card {
-  padding: 2em;
+.DetailContent {
+  width: 50%;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+.ItemHeader {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.InfoDescription {
+  font-family: var(--font-body);
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.InfoPrice {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 2rem;
 }

@@ -1,31 +1,30 @@
 import ItemCount from './ItemCount'
 
-// Se eliminó 'id' de los paréntesis porque no lo usamos visualmente
-const ItemDetail = ({ name, img, category, description, price, stock }) => {
+// Eliminé 'category' de aquí abajo 👇
+const ItemDetail = ({ name, img, description, price, stock }) => {
     return (
-        <article className="CardItem" style={{ maxWidth: '600px', padding: '20px', border: '1px solid #ddd' }}>
-            <header className="Header">
-                <h2 className="ItemHeader">
-                    {name}
-                </h2>
-            </header>
-            <picture>
-                <img src={img} alt={name} className="ItemImg" style={{ width: '100%' }} />
+        <article className="CardItem">
+            <picture style={{ display: 'flex' }}>
+                <img src={img} alt={name} className="ItemImgDetail" />
             </picture>
-            <section>
-                <p className="Info">
-                    Categoria: {category}
+            
+            <section className="DetailContent">
+                <header>
+                    <h2 className="ItemHeader">
+                        {name}
+                    </h2>
+                </header>
+                <p className="InfoDescription">
+                    {description}
                 </p>
-                <p className="Info">
-                    Descripción: {description}
+                <p className="InfoPrice">
+                    ${price}
                 </p>
-                <p className="Info">
-                    Precio: ${price}
-                </p>
+                
+                <footer className='ItemFooter'>
+                    <ItemCount initial={1} stock={stock} onAdd={(quantity) => console.log('Cantidad agregada ', quantity)}/>
+                </footer>
             </section>
-            <footer className='ItemFooter'>
-                <ItemCount initial={1} stock={stock} onAdd={(quantity) => console.log('Cantidad agregada ', quantity)}/>
-            </footer>
         </article>
     )
 }

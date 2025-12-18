@@ -9,8 +9,8 @@ const ItemDetailContainer = () => {
     const { itemId } = useParams()
 
     useEffect(() => {
-        // Eliminamos el setLoading(true) de aquí para evitar el error.
-        // Al cambiar el itemId, simplemente lanzamos la nueva petición.
+        // Elimino el setLoading(true) de aquí para evitar el error.
+        // Al cambiar el itemId, simplemente lanzo la nueva petición.
         getProductById(itemId)
             .then(response => {
                 setProduct(response)
@@ -20,12 +20,12 @@ const ItemDetailContainer = () => {
             })
     }, [itemId])
 
-    // LÓGICA CLAVE: Calculamos el estado de carga "al vuelo".
+    // LÓGICA CLAVE: Calculo el estado de carga "al vuelo".
     // Si no hay producto cargado, O SI el ID del producto que tenemos en memoria
     // es diferente al que pide la URL (itemId), significa que estamos cargando uno nuevo.
     const isLoading = !product || String(product.id) !== itemId
 
-    // Mientras isLoading sea true, mostramos el mensaje y evitamos renderizar el ItemDetail con datos viejos
+    // Mientras isLoading sea true, muestro el mensaje y evitamos renderizar el ItemDetail con datos viejos
     if(isLoading) return <h3>Cargando detalle...</h3>
 
     return(
