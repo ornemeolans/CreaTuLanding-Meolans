@@ -1,38 +1,52 @@
-// src/components/ItemDetailContainer.jsx
-import { useState, useEffect } from 'react'
-import { getProductById } from '../asyncMock'
-import ItemDetail from './ItemDetail'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import ItemDetail from "./ItemDetail";
+import { useParams } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState(null)
-    const { itemId } = useParams()
+    const [product, setProduct] = useState(null);
+    // Eliminamos el estado 'loading' manual para evitar el error de ESLint
+
+    const { itemId } = useParams();
 
     useEffect(() => {
-        // Elimino el setLoading(true) de aquí para evitar el error.
-        // Al cambiar el itemId, simplemente lanzo la nueva petición.
-        getProductById(itemId)
-            .then(response => {
-                setProduct(response)
+        // Ya no usamos setLoading(true) aquí.
+
+        const docRef = doc(db, "products", itemId);
+
+        getDoc(docRef)
+            .then((response) => {
+                if (response.exists()) {
+                    const data = response.data();
+                    const productAdapted = { id: response.id, ...data };
+                    setProduct(productAdapted);
+                } else {
+                    console.log("El producto no existe");
+                }
             })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [itemId])
+            .catch((error) => console.log(error));
+        // No necesitamos finally() porque el renderizado condicional se encarga
+    }, [itemId]);
 
-    // LÓGICA CLAVE: Calculo el estado de carga "al vuelo".
-    // Si no hay producto cargado, O SI el ID del producto que tenemos en memoria
-    // es diferente al que pide la URL (itemId), significa que estamos cargando uno nuevo.
-    const isLoading = !product || String(product.id) !== itemId
+    // LÓGICA DE CARGA DERIVADA:
+    // ¿Está cargando? Sí, si no hay producto cargado todavía,
+    // O si el producto que tenemos en memoria no es el que pide la URL.
+    const isLoading = !product || product.id !== itemId;
 
-    // Mientras isLoading sea true, muestro el mensaje y evitamos renderizar el ItemDetail con datos viejos
-    if(isLoading) return <h3>Cargando detalle...</h3>
+    if (isLoading) {
+        return (
+            <div className="main-content Container" style={{ marginTop: '20px', minHeight: '80vh', textAlign: 'center' }}>
+                <h3>Cargando detalle...</h3>
+            </div>
+        );
+    }
 
-    return(
-        <div className='ItemDetailContainer' style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+    return (
+        <div className="main-content Container" style={{ marginTop: '20px', minHeight: '80vh' }}>
             <ItemDetail {...product} />
         </div>
-    )
-}
+    );
+};
 
-export default ItemDetailContainer
+export default ItemDetailContainer;

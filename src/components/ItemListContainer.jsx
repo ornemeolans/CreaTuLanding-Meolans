@@ -1,51 +1,73 @@
-// src/components/ItemListContainer.jsx
-import React, { useState, useEffect } from 'react';
-import { getProducts, getProductsByCategory } from '../asyncMock';
-import ItemList from './ItemList';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([]);
-    
-    // Obtenemos la categoría de la URL (será undefined si estamos en el Home)
+    // Guardamos un objeto con los datos Y la categoría a la que pertenecen
+    const [dataPayload, setDataPayload] = useState({
+        products: [],
+        loadedCategory: null // Para saber de qué categoría son los productos actuales
+    });
+
     const { categoryId } = useParams();
 
-    // ESTADO NUEVO: Guardamos qué categoría es la que está cargada actualmente en 'products'.
-    // Iniciamos con null para forzar la carga inicial.
-    const [loadedCategory, setLoadedCategory] = useState(null);
-
     useEffect(() => {
-        // Elimino el setLoading(true) síncrono que causaba el error.
+        const collectionRef = categoryId
+            ? query(collection(db, "products"), where("category", "==", categoryId))
+            : collection(db, "products");
 
-        // Selecciono la función según si hay categoría o no
-        const asyncFunc = categoryId ? getProductsByCategory : getProducts;
+        getDocs(collectionRef)
+            .then((response) => {
+                const productsAdapted = response.docs.map((doc) => {
+                    const data = doc.data();
+                    return { id: doc.id, ...data };
+                });
 
-        asyncFunc(categoryId)
-            .then(response => {
-                setProducts(response);
-                // Una vez que llegan los datos, actualizo "loadedCategory"
-                // para indicar que ya tengo lo que pide la URL.
-                setLoadedCategory(categoryId);
+                // Actualizamos todo junto: los productos y la "firma" de la categoría actual
+                setDataPayload({
+                    products: productsAdapted,
+                    loadedCategory: categoryId // Guardamos qué categoría acabamos de cargar
+                });
             })
-            .catch(error => {
-                console.error(error);
-            });
-            
-    }, [categoryId]); // Se ejecuta cada vez que cambia la categoría en la URL
+            .catch((error) => console.log(error));
+    }, [categoryId]);
 
-    // LÓGICA CLAVE: ¿Estamos cargando?
-    // Si la categoría de la URL (categoryId) es diferente a la que tenemos guardada (loadedCategory),
-    // significa que el usuario cambió de página y todavía estamos esperando los datos nuevos.
-    const isLoading = categoryId !== loadedCategory;
+    // Lógica para la imagen de fondo (Parallax)
+    const bgImage = categoryId
+        ? "/img/matera-minimal.png"
+        : "/img/vajilla-nordica.png";
 
-    if(isLoading) return <h3 style={{ textAlign: 'center', marginTop: '50px' }}>Cargando productos...</h3>
+    // LÓGICA DE CARGA:
+    // Si lo que pide la URL (categoryId) es distinto a lo que tenemos guardado (loadedCategory)
+    // significa que estamos cargando datos nuevos.
+    const isLoading = dataPayload.loadedCategory !== categoryId;
+
+    if (isLoading) {
+        return (
+            <div style={{ height: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <h3>Cargando productos Kósa...</h3>
+            </div>
+        );
+    }
 
     return (
-        <div className="item-list-container">
-            <h1 className="greeting-title">{greeting}</h1>
-            <ItemList products={products}/>
+        <div>
+            {/* SECCIÓN PARALLAX */}
+            <div className="parallax-header" style={{ backgroundImage: `url(${bgImage})` }}>
+                <div className="parallax-overlay"></div>
+                <h1 className="parallax-title">
+                    {greeting} {categoryId && `| ${categoryId.toUpperCase()}`}
+                </h1>
+            </div>
+
+            {/* CONTENIDO */}
+            <div className="main-content Container">
+                <ItemList products={dataPayload.products} />
+            </div>
         </div>
     );
-}
+};
 
 export default ItemListContainer;

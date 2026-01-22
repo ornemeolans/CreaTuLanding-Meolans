@@ -1,18 +1,11 @@
-:root {
-    /* Paleta KÖSA */
-    --color-primary: #1A1A1A;
-    /* Texto principal, Logo */
-    --color-secondary: #F5F5DC;
-    /* Beige Crema (Fondos suaves) */
-    --color-accent: #A0522D;
-    /* Siena Quemado (Botones, Links activos) */
-    --color-grey: #D1D1D1;
-    /* Gris apoyo (Bordes) */
-    --color-white: #FFFFFF;
-    /* Blanco para tarjetas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap');
 
-    /* Tipografía */
-    --font-title: 'Poppins', sans-serif;
+:root {
+    --color-primary: #1A1A1A;
+    --color-secondary: #F5F5DC;
+    --color-accent: #A0522D;
+    --color-support: #D1D1D1;
+    --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
 
@@ -23,11 +16,9 @@
 }
 
 body {
-    background-color: var(--color-secondary);
-    /* Fondo Beige Crema */
-    color: var(--color-primary);
     font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 a {
@@ -35,6 +26,137 @@ a {
     color: inherit;
 }
 
-ul {
-    list-style: none;
+/* --- CLASES PARALLAX --- */
+.parallax-header {
+    height: 50vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Capa oscura para que se lea el texto sobre la foto */
+.parallax-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.parallax-title {
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.main-content {
+    position: relative;
+    background-color: var(--color-secondary);
+    padding: 40px 20px;
+    min-height: 50vh;
+    box-shadow: 0 -20px 30px rgba(0, 0, 0, 0.1);
+    /* Sombra hacia arriba */
+    z-index: 5;
+}
+
+/* --- COMPONENTES --- */
+.Container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--color-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-support);
+}
+
+.NavBar h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.Categories {
+    display: flex;
+    gap: 20px;
+}
+
+.Option {
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: color 0.3s;
+}
+
+.Option:hover,
+.Option.Active {
+    color: var(--color-accent);
+}
+
+/* Cards */
+.ListGroup {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.CardItem {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.CardItem:hover {
+    transform: translateY(-5px);
+}
+
+.CardImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.ItemFooter {
+    padding: 15px;
+    text-align: center;
+}
+
+/* Botones Kósa */
+.Button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.Button:hover {
+    background-color: var(--color-accent);
+}
+
+.Button:disabled {
+    background-color: var(--color-support);
 }
