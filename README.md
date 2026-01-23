@@ -34,7 +34,7 @@ Sigue estos pasos para correr el proyecto en tu computadora:
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/TU_USUARIO/ProyectoFinal+Meolans.git](https://github.com/TU_USUARIO/ProyectoFinal+Meolans.git)
+    git clone https://github.com/ornemeolans/CreaTuLanding-Meolans
     ```
     *(Asegúrate de reemplazar la URL con la de tu repositorio)*
 
