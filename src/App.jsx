@@ -12,6 +12,7 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <CartProvider>
+                    <CargaDeDatos />
                     <NavBar />
                     <Routes>
                         <Route path="/" element={<ItemListContainer greeting={"Bienvenidos a KÕSA"} />} />
