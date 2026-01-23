@@ -5,6 +5,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { CartProvider } from "./context/CartContext";
+import CargaDeDatos from "./components/CargaDeDatos"; // 👈 1. IMPORTANTE: Importar aquí
 import "./App.css";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <CartProvider>
+                    {/* 👇 2. IMPORTANTE: Poner el componente aquí arriba para ver el botón */}
+                    <CargaDeDatos /> 
                     
                     <NavBar />
                     <Routes>
