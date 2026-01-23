@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 const CartWidget = () => {
     const { totalQuantity } = useContext(CartContext);
 
-    // Si no hay items, ocultamos el widget para que quede más limpio
+    // Si no hay productos, ocultamos el carrito
     if (totalQuantity === 0) return null;
 
     return (
-        <Link to="/cart" className="cart-widget" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
-            {/* Asegurate que esta imagen exista en public/img/ o usa un emoji 🛒 si prefieres */}
-            <img src="/img/cubiertos.png" alt="cart" style={{ width: 30 }} />
-            <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{totalQuantity}</span>
+        <Link to="/cart" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'black', marginRight: '10px' }}>
+            {/* 👇 Aquí está el cambio: Usamos el emoji directamente */}
+            <span style={{ fontSize: '30px', marginRight: '5px' }}>🛒</span>
+            
+            <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{totalQuantity}</span>
         </Link>
     );
 };
