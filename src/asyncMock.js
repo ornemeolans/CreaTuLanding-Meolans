@@ -1,16 +1,10 @@
-import materaMinimal from './assets/matera minimal.png';
-import floreroGeometrico from './assets/florero geometrico.png';
-import organizadorEscritorio from './assets/organizador escritorio.png';
-import difusorAromatico from './assets/difusor aromatico.png';
-import setTazas from './assets/set tazas.png';
-
 const products = [
     {
         id: "1",
         name: "MATERA MINIMAL",
         price: 12500,
         category: "hogar-y-cocina",
-        img: materaMinimal, 
+        img: "/img/matera-minimal.png",
         stock: 15,
         description: "Termo de acero inoxidable doble pared, 500ml."
     },
@@ -19,7 +13,7 @@ const products = [
         name: "FLORERO GEOMÉTRICO",
         price: 8900,
         category: "decoracion",
-        img: floreroGeometrico,
+        img: "/img/florero-geometrico.png",
         stock: 12,
         description: "Florero de cerámica en tono Beige Crema."
     },
@@ -28,7 +22,7 @@ const products = [
         name: "ORGANIZADOR ESCRITORIO",
         price: 6500,
         category: "libreria",
-        img: organizadorEscritorio,
+        img: "/img/organizador-escritorio.png",
         stock: 20,
         description: "Organizador modular de madera."
     },
@@ -37,7 +31,7 @@ const products = [
         name: "DIFUSOR AROMÁTICO",
         price: 3200,
         category: "decoracion",
-        img: difusorAromatico,
+        img: "/img/difusor-aromatico.png",
         stock: 10,
         description: "Difusor con varillas de bambú y esencia de vainilla."
     },
@@ -46,7 +40,7 @@ const products = [
         name: "SET TAZAS",
         price: 4500,
         category: "hogar-y-cocina",
-        img: setTazas,
+        img: "/img/set-tazas.png",
         stock: 8,
         description: "Set de 2 tazas de cerámica esmaltada."
     }
