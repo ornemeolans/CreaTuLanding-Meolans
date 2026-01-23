@@ -5,14 +5,17 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import { CartProvider } from "./context/CartContext";
-import "./App.css"; // (O index.css)
+import CargaDeDatos from "./components/CargaDeDatos"; // 👈 1. IMPORTANTE: Importar aquí
+import "./App.css";
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
                 <CartProvider>
-                    <CargaDeDatos />
+                    {/* 👇 2. IMPORTANTE: Poner el componente aquí arriba para ver el botón */}
+                    <CargaDeDatos /> 
+                    
                     <NavBar />
                     <Routes>
                         <Route path="/" element={<ItemListContainer greeting={"Bienvenidos a KÕSA"} />} />
