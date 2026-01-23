@@ -10,8 +10,7 @@ import "./App.css"; // (O index.css)
 function App() {
     return (
         <div className="App">
-            {/* Agrega el basename aquí 👇 */}
-            <BrowserRouter basename="/CreaTuLanding-Meolans">
+            <BrowserRouter>
                 <CartProvider>
                     <NavBar />
                     <Routes>
