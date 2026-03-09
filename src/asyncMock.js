@@ -6,6 +6,7 @@ const products = [
         price: 12500,
         category: "bazar",
         img: "/img/matera-minimal.png",
+        imgHover: "/img/matera-minimal.png", // Segunda imagen para hover
         stock: 15,
         description: "Termo de acero inoxidable doble pared, 500ml, ideal para llevar."
     },
@@ -15,6 +16,7 @@ const products = [
         price: 4500,
         category: "bazar",
         img: "/img/set-tazas.png",
+        imgHover: "/img/set-tazas.png",
         stock: 8,
         description: "Set de 2 tazas de cerámica esmaltada de alta durabilidad."
     },
@@ -24,6 +26,7 @@ const products = [
         price: 8900,
         category: "bazar",
         img: "/img/cubiertos.png",
+        imgHover: "/img/cubiertos.png",
         stock: 10,
         description: "Set de cubiertos de acero inoxidable con acabado dorado mate."
     },
@@ -33,6 +36,7 @@ const products = [
         price: 6200,
         category: "bazar",
         img: "/img/jarro-termico.png",
+        imgHover: "/img/jarro-termico.png",
         stock: 20,
         description: "Jarro térmico con manija, conserva calor por 4 horas."
     },
@@ -42,6 +46,7 @@ const products = [
         price: 45000,
         category: "bazar",
         img: "/img/pava-electrica.png",
+        imgHover: "/img/pava-electrica.png",
         stock: 5,
         description: "Pava eléctrica diseño retro, corte automático y medidor de agua."
     },
@@ -51,6 +56,7 @@ const products = [
         price: 3500,
         category: "bazar",
         img: "/img/vaso-cervecero.png",
+        imgHover: "/img/vaso-cervecero.png",
         stock: 24,
         description: "Vaso estilo pinta de vidrio reforzado."
     },
@@ -60,6 +66,7 @@ const products = [
         price: 5800,
         category: "bazar",
         img: "/img/vaso-termico-chico-con-tapa.png",
+        imgHover: "/img/vaso-termico-chico-con-tapa.png",
         stock: 18,
         description: "Vaso térmico pequeño con tapa antiderrame, ideal café de especialidad."
     },
@@ -71,6 +78,7 @@ const products = [
         price: 8900,
         category: "deco",
         img: "/img/florero-geometrico.png",
+        imgHover: "/img/florero-geometrico.png",
         stock: 12,
         description: "Florero de cerámica con diseño geométrico en tono Beige Crema."
     },
@@ -80,6 +88,7 @@ const products = [
         price: 3200,
         category: "deco",
         img: "/img/difusor-aromatico.png",
+        imgHover: "/img/difusor-aromatico.png",
         stock: 10,
         description: "Difusor con varillas de bambú y esencia de vainilla y coco."
     },
@@ -89,6 +98,7 @@ const products = [
         price: 4200,
         category: "deco",
         img: "/img/vela-de-soja.png",
+        imgHover: "/img/vela-de-soja.png",
         stock: 15,
         description: "Vela de cera de soja en envase de vidrio, aroma lavanda."
     },
@@ -100,6 +110,7 @@ const products = [
         price: 6500,
         category: "sets",
         img: "/img/organizador-escritorio.png",
+        imgHover: "/img/organizador-escritorio.png",
         stock: 20,
         description: "Organizador modular de madera para mantener tu espacio ordenado."
     },
@@ -109,6 +120,7 @@ const products = [
         price: 22000,
         category: "sets",
         img: "/img/juego-de-mate-y-termo.png",
+        imgHover: "/img/juego-de-mate-y-termo.png",
         stock: 6,
         description: "Kit completo: Termo 1L + Mate camionero + Bombilla."
     },
@@ -118,6 +130,7 @@ const products = [
         price: 32000,
         category: "sets",
         img: "/img/vajilla-nordica.png",
+        imgHover: "/img/vajilla-nordica.png",
         stock: 4,
         description: "Juego de vajilla para 4 personas, cerámica artesanal."
     }
@@ -143,6 +156,23 @@ export const getProductsByCategory = (categoryId) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(products.filter(prod => prod.category === categoryId));
+        }, 500);
+    });
+};
+
+export const getCategories = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const categories = [...new Set(products.map(p => p.category))];
+            const categoryLabels = {
+                bazar: "Bazar",
+                deco: "Deco",
+                sets: "Sets"
+            };
+            resolve(categories.map(cat => ({
+                id: cat,
+                label: categoryLabels[cat] || cat
+            })));
         }, 500);
     });
 };
